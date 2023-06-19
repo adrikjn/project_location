@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<div class="container mt-3">
+	<h1 class="text-center my-4">Réserver le véhicule sélectionné</h1>
+
+	<div class="col-md-10 mx-auto">
+		<div class="card bg-dark text-white mb-3">
+			<h3 class="card-header">{{ veh.titre }}</h3>
+			<img src="{{ veh.photo }}" alt="Image du véhicule">
+			<div class="card-body">
+				<p class="card-text">{{ veh.description }}</p>
+				<p class="card-text text-end fw-bold">{{ veh.prixJournalier }}€/j</p>
+			</div>
+		</div>
+	</div>
+    <div class="col-md-10 mx-auto bg-dark text-white card p-5">
+	{% if app.user %}
+
+		{{ form_start(form) }}
+
+		{{ form_row(form.dateHeureDepart) }}
+		{{ form_row(form.dateHeureFin) }}
+        <div class="text-end mt-4">
+		    <button type="submit" class="btn btn-outline-warning">Réserver à ces dates</button>
+        </div>
+		{{ form_end(form) }}
+	{% else %}
+		<a href="{{ path('app_login') }}">Veuillez vous connecter</a>
+		pour réserver un véhicule.
+	{% endif %}
+    </div>
+</div>
+
+{% endblock %}

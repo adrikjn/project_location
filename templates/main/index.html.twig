@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://www.mercedes-benz.fr/content/france/fr/passengercars/_jcr_content/root/responsivegrid/simple_stage_1564354.component.damq6.3363542729762.jpg/2023_EQ_RANGE-Stage.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+         <h2 class="h1 text-white" >Bienvenue sur Locauto.com</h2>
+        <p class="text-warning">Site N°1 des locations de voitures dans le monde</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://www.mercedes-benz.fr/content/france/fr/passengercars/models/saloon/eqe/overview/_jcr_content/root/responsivegrid/simple_stage.component.damq6.3365013431300.jpg/EQE_STAGE.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h2 class="h1 text-white" >Louez la voiture que vous voulez</h2>
+        <p class="text-warning">Avec plus de 200 modèles</p>
+        </div>
+    </div>
+    <div class="carousel-item">
+      <img src="https://www.mercedes-benz.fr/content/france/fr/passengercars/the-brand/rubrique-evenements/home-events/_jcr_content/root/responsivegrid/simple_stage_copy.component.damq6.3345247859232.jpg/Stage-Rodin.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h2 class="h1 text-white" >Créez votre compte et rejoignez-nous</h2>
+        <a href="{{ path('app_login') }}" class="btn btn-outline-warning">Inscrivez-vous</a>
+        </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+   
+    
+    
+    <h3 class="text-center my-5">Liste des véhicules disponibles dans notre agence</h1><
+
+	<div class="row">
+		{% for item in vehs %}
+			<div class="col-md-4">
+				<div class="card text-white bg-dark mb-3" >
+					<h4 class="card-header">{{ item.titre }}</h3>
+					<img src="{{ item.photo }}" alt="Image du véhicule">
+					<div class="card-body">
+						<p class="card-text">{{ item.description|slice(0, 200) }}...</p>
+						<p class="card-text text-end fw-bold">{{ item.prixJournalier }}€/j</p>
+					</div>
+					<div class="card-body text-end">
+						<a href="{{ path('resa_vehicule', {id: item.id}) }}" class="card-link btn btn-outline-warning btn-sm">Réserver</a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
+{% endblock %}

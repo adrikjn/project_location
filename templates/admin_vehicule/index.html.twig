@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vehicule index{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Vehicule index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Marque</th>
+                <th>Modele</th>
+                <th>Description</th>
+                <th>Photo</th>
+                <th>PrixJournalier</th>
+                <th>DateEnregistrement</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for vehicule in vehicules %}
+            <tr>
+                <td>{{ vehicule.id }}</td>
+                <td>{{ vehicule.titre }}</td>
+                <td>{{ vehicule.marque }}</td>
+                <td>{{ vehicule.modele }}</td>
+                <td>{{ vehicule.description|slice(0, 20) }}</td>
+                <td><img src="{{ vehicule.photo }}" alt="" width="50"></td>
+                <td>{{ vehicule.prixJournalier }}</td>
+                <td>{{ vehicule.dateEnregistrement ? vehicule.dateEnregistrement|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_vehicule_show', {'id': vehicule.id}) }}">show</a>
+                    <a href="{{ path('app_admin_vehicule_edit', {'id': vehicule.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_vehicule_new') }}">Create new</a>
+    </div>
+{% endblock %}
